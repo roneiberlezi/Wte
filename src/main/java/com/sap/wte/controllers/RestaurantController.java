@@ -65,4 +65,10 @@ public class RestaurantController {
 
         return "redirect:/";
     }
+
+    @RequestMapping(value = "/remove", method = RequestMethod.GET)
+    public String remove(@RequestParam("id") int id, Model model){
+        restaurantService.removeRestaurante(id);
+        return "redirect:/";
+    }
 }

@@ -34,4 +34,9 @@ public class DefaultRestaurantService implements RestaurantService{
     public void updateRestaurant(Restaurant restaurant) {
         restaurantDao.update(restaurant);
     }
+
+    @Override
+    public void removeRestaurante(int id) {
+        restaurantDao.delete(id);
+    }
 }

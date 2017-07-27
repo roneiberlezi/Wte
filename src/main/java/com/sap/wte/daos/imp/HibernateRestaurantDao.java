@@ -32,7 +32,9 @@ public class HibernateRestaurantDao extends HibernateDaoSupport implements Resta
     @Transactional
     @Override
     public void delete(int id) {
-
+        Restaurant restaurant = new Restaurant();
+        restaurant.setId(id);
+        getHibernateTemplate().delete(restaurant);
     }
 
     @Override
