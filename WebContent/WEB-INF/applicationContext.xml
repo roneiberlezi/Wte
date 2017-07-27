@@ -8,7 +8,7 @@
 
     <context:annotation-config/>
     <mvc:annotation-driven/>
-    <mvc:resources mapping="/resources/**" location="/resources/"/>
+    <mvc:resources mapping="/resources/**" location="resources/"/>
 
     <!--&lt;!&ndash; Beans de service &ndash;&gt;-->
 
@@ -22,16 +22,13 @@
 
     <!-- BOOKING REST BEANS-->
 
-
-    <!-- TRAINING  BEANS-->
     <!-- Beans de service -->
-    <!--<bean name="trainingService" class="com.sap.training.services.impls.DefaultTrainingService"/>-->
-
+    <bean name="restaurantService" class="com.sap.wte.services.imp.DefaultRestaurantService" />
 
     <!-- Beans de dao -->
-    <!--<bean name="hibernateTrainingDao" class="com.sap.training.daos.impls.HibernateTrainingDao">-->
-        <!--<property name="sessionFactory" ref="sessionFactory"/>-->
-    <!--</bean>-->
+    <bean name="hibernateRestaurantDao" class="com.sap.wte.daos.imp.HibernateRestaurantDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
 
     <!-- Permite diversas implementações, só muda o name -->
     <!--<alias name="hibernateTrainingDao" alias="trainingDao"/>-->
