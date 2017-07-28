@@ -19,6 +19,7 @@
     <form:errors path="name"/><br/>
     Average Price: <form:input path="averagePrice" type="BigDecimal" value="${restaurant.averagePrice}"/>
     <form:errors path="averagePrice" /><br/>
+    Description: <form:input path="description" type="text"/><br/>
     Location: <form:input path="location" type="text" value="${restaurant.location}"/>
     <form:errors path="location"/><br/>
     Alelo Accepted: <form:checkbox path="aleloAccepted" value="${restaurant.aleloAccepted}"/><br/>

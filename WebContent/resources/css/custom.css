@@ -1,0 +1,8 @@
+.input-group {
+    min-width: 100%;
+}
+
+.file {
+    visibility: hidden;
+    position: absolute;
+}

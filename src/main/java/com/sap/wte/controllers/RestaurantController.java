@@ -63,7 +63,7 @@ public class RestaurantController {
         restaurantService.updateRestaurant(restaurant);
         redirectAttributes.addAttribute("success", true);
 
-        return "redirect:/";
+        return "redirect:/edit";
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.GET)
