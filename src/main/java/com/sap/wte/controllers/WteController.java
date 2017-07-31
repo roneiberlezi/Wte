@@ -23,9 +23,4 @@ public class WteController {
     public String home(){
         return "redirect:restaurant/";
     }
-
-    @RequestMapping(value = "/bs", method = RequestMethod.GET)
-    public String boostrapTest(){
-        return "bs-test";
-    }
 }

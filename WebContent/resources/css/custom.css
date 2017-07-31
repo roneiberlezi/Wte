@@ -2,7 +2,19 @@
     min-width: 100%;
 }
 
-.file {
-    visibility: hidden;
-    position: absolute;
+.same-size {
+    width: 15ch;
+    text-align: left;
+}
+
+.img-size {
+    max-height: 200px;
+    height: auto;
+    vertical-align: middle;
+}
+
+.vcenter {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
 }
