@@ -24,43 +24,45 @@
                 <div class="row content">
                     <div class="col-md-6 justify-content-between">
 
-                        <form:form modelAttribute="restaurant" servletRelativeAction="add" method="POST">
+                        <form:form modelAttribute="restaurant" servletRelativeAction="saveOrUpdate" method="POST">
+                            <form:input class="form-control" path="id" type="hidden" value="${restaurant.id}"/>
                             <div class="input-group">
                                 <span style="width:15ch; text-align:left;" class="input-group-addon">Name</span>
-                                <form:input class="form-control" id="restaurantName" path="name" type="text"/>
+                                <form:input class="form-control" id="restaurantName" path="name" type="text" value="${restaurant.name}"/>
                             </div>
                             <form:errors path="name"/><br/>
 
                             <div class="input-group">
                                 <span style="width:15ch; text-align:left;" class="input-group-addon">R$</span>
-                                <form:input class="form-control" path="averagePrice" type="BigDecimal" placeholder="price"/>
+                                <form:input class="form-control" path="averagePrice" type="BigDecimal" placeholder="price" value="${restaurant.averagePrice}"/>
                             </div>
                             <form:errors path="averagePrice" /><br/>
 
                             <div class="input-group">
                                 <span style="width:15ch; text-align:left;" class="input-group-addon">Description</span>
-                                <form:textarea class="form-control" path="description" type="text"/>
+                                <form:textarea class="form-control" path="description" type="text" value="${restaurant.description}"/>
                             </div>
                             <br/>
 
                             <div class="input-group">
                                 <span style="width:15ch; text-align:left;" class="input-group-addon">Location</span>
-                                <form:input class="form-control" path="location" type="text"/>
+                                <form:input class="form-control" path="location" type="text" value="${restaurant.location}"/>
                             </div>
                             <form:errors path="location"/><br/>
 
                             <div class="input-group">
                                 <span style="width:15ch; text-align:left;" class="input-group-addon">Image URL</span>
-                                <form:input class="form-control" path="imageURL" type="text"/>
+                                <form:input class="form-control" path="imageURL" type="text" value="${restaurant.imageURL}"/>
                             </div>
                             <br/>
 
                             <div class="input-group">
-                                Accepts Alelo: <form:checkbox path="aleloAccepted"/>
+                                Accepts Alelo: <form:checkbox path="aleloAccepted" value="${restaurant.aleloAccepted}"/>
                             </div>
                             <br/>
 
                             <form:button class="btn btn btn-primary" id="saveButton">Save</form:button>
+                            <form:button class="btn btn btn-primary" type="button" name="cancel" value="cancel" onClick="window.location='/';">Cancel</form:button>
                         </form:form>
                     </div>
 

@@ -33,17 +33,23 @@ public class RestaurantController {
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String newRestaurantForm(Model model){
         model.addAttribute("restaurant", new Restaurant());
-        return "restaurant/new";
+        return "restaurant/restaurant-form";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String create(@Valid Restaurant restaurant, BindingResult bindingResult,
-                                   Model model, RedirectAttributes redirectAttributes, HttpServletRequest req) {
+    @RequestMapping(value = "/saveOrUpdate", method = RequestMethod.POST)
+    public String saveOrUpdate(@Valid Restaurant restaurant, BindingResult bindingResult,
+                         Model model, RedirectAttributes redirectAttributes, HttpServletRequest req) {
 
         if (bindingResult.hasErrors()) {
-            return "restaurant/new";
+            return "restaurant/restaurant-form";
         }
-        restaurantService.createRestaurant(restaurant);
+
+        if (restaurant.getId() == 0) {
+            restaurantService.createRestaurant(restaurant);
+        }else{
+            restaurantService.updateRestaurant(restaurant);
+        }
+
         redirectAttributes.addFlashAttribute("success", true);
         return "redirect:/";
     }
@@ -51,19 +57,7 @@ public class RestaurantController {
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public String editRestaurantForm(@RequestParam("id") int id, Model model){
         model.addAttribute("restaurant", restaurantService.getRestaurant(id));
-        return "restaurant/edit";
-    }
-
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@Valid Restaurant restaurant, BindingResult bindingResult, RedirectAttributes redirectAttributes){
-        if (bindingResult.hasErrors()){
-            return "restaurant/edit";
-        }
-
-        restaurantService.updateRestaurant(restaurant);
-        redirectAttributes.addAttribute("success", true);
-
-        return "redirect:/edit";
+        return "restaurant/restaurant-form";
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.GET)
