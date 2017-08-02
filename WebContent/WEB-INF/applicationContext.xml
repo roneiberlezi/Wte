@@ -24,11 +24,19 @@
 
     <!-- Beans de service -->
     <bean name="restaurantService" class="com.sap.wte.services.imp.DefaultRestaurantService" />
+    <bean name="userService" class="com.sap.wte.services.imp.DefaultUserService" />
 
     <!-- Beans de dao -->
     <bean name="hibernateRestaurantDao" class="com.sap.wte.daos.imp.HibernateRestaurantDao">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+
+    <bean name="hibernateUserDao" class="com.sap.wte.daos.imp.HibernateUserDao" >
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!-- Beans de Validator -->
+    <bean name="userValidator"  class="com.sap.wte.validators.UserValidator" />
 
     <!-- Permite diversas implementações, só muda o name -->
     <!--<alias name="hibernateTrainingDao" alias="trainingDao"/>-->

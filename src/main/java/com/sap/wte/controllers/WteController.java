@@ -21,6 +21,6 @@ public class WteController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(){
-        return "redirect:restaurant/";
+        return "redirect:/user/login";
     }
 }

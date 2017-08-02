@@ -5,13 +5,11 @@
   Time: 10:26
   To change this template use File | Settings | File Templates.
 --%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8" %>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <%@include file="/resources/includes/header.jsp"%>
 <body>
+    <%@include file="/resources/includes/nav-bar.jsp"%>
 
 <div class="container-fluid text-center">
     <div class="row content">
@@ -27,10 +25,8 @@
                         <div class="row content">
 
                             <div class="col-md-6 justify-content-between">
-                                <h5 class="mb-1">${restaurant.name}</h5>
+                                <h4 class="mb-1">${restaurant.name}</h4>
                                 <small>R$ ${restaurant.averagePrice}</small>
-
-                                <%--<img src="/resources/images/exemplo.jpg" class="img-rounded" width="300" height="300">--%>
 
                                 <p class="mb-1">${restaurant.description}</p>
                                 <c:if test="${restaurant.aleloAccepted}">

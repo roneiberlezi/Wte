@@ -4,8 +4,8 @@ var map;
 var pyrmont;
 
 function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.watchPosition(showPosition);
+    if (navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
     }
 }
 
@@ -14,6 +14,10 @@ function showPosition(position) {
     longitude = position.coords.longitude;
 
     initialize();
+}
+
+function showError() {
+    $("#googleResult").html("Location information is unavailable.");
 }
 
 function initialize() {
