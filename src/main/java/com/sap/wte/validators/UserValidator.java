@@ -29,10 +29,16 @@ public class UserValidator implements Validator {
             errors.rejectValue("passwordConfirm", "Diff.user.passwordConfirm");
         }
 
+        if(user.getPassword().length() < 6){
+            errors.rejectValue("password", "Size.user.password");
+        }
+
+        if(!user.getPassword().matches("^(?=.*\\d)(?=.*[a-z]).{6,255}$")){
+            errors.rejectValue("password", "Pattern.user.password");
+        }
+
         if (userService.findUserByEmail(user.getEmail()) != null){
             errors.rejectValue("email", "Duplicate.user.email");
         }
-
-        //TODO - Verify if is needed to validate unique email, actually @UniqueConstraint is seted on user model.
     }
 }

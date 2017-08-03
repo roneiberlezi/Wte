@@ -3,6 +3,7 @@ package com.sap.wte.services.imp;
 import com.sap.wte.daos.RestaurantDao;
 import com.sap.wte.models.Restaurant;
 import com.sap.wte.services.RestaurantService;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -10,7 +11,8 @@ import java.util.List;
 /**
  * Created by I863273 on 26/07/2017.
  */
-public class DefaultRestaurantService implements RestaurantService{
+@Transactional
+public class RestaurantServiceImpl implements RestaurantService{
 
     @Resource
     RestaurantDao restaurantDao;

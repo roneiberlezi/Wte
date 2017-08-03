@@ -13,7 +13,7 @@
 
 <div class="container-fluid text-center">
     <div class="row content">
-        <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2 text-left">
+        <div class="content-color col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2 text-left">
 
             <div class="list-group">
 
@@ -24,11 +24,18 @@
 
                         <div class="row content">
 
-                            <div class="col-md-6 justify-content-between">
+                            <div class="col-md-3 justify-content-between">
+                                <div class="thumbnail" >
+                                    <%--<img src="${restaurant.imageURL}" class="img-responsive center-block img-size thumbnail">--%>
+                                    <img src="${restaurant.imageURL}" class="img-size">
+                                </div>
+                            </div>
+
+                            <div class="col-md-9 justify-content-between">
                                 <h4 class="mb-1">${restaurant.name}</h4>
                                 <small>R$ ${restaurant.averagePrice}</small>
 
-                                <p class="mb-1">${restaurant.description}</p>
+                                <p class="mb-1">${restaurant.location}</p>
                                 <c:if test="${restaurant.aleloAccepted}">
                                     <img src="/resources/images/alelo-logo.png" class="img-rounded" width="50" height="50">
                                 </c:if>
@@ -36,10 +43,6 @@
                                 <br>
                                 <button type="button" class="btn btn-primary" onclick="location.href='edit?id=${restaurant.id}';">Edit</button>
                                 <button type="button" class="btn btn-danger" onclick="location.href='remove?id=${restaurant.id}';">Remove</button>
-                            </div>
-
-                            <div class="col-md-6 justify-content-between">
-                                <img src="${restaurant.imageURL}" class="img-responsive center-block img-size">
                             </div>
 
                         </div>

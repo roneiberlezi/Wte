@@ -1,8 +1,8 @@
 package com.sap.wte.controllers;
 
 import com.sap.wte.models.User;
+import com.sap.wte.services.SecurityService;
 import com.sap.wte.services.UserService;
-import com.sap.wte.validators.UserValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,6 +26,9 @@ public class UserController {
     @Resource
     UserService userService;
 
+    @Resource
+    SecurityService securityService;
+
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String registration(Model model){
         model.addAttribute("user", new User());
@@ -43,11 +46,24 @@ public class UserController {
 
         userService.save(user);
 
-        return "redirect:/restaurant/";
+        return "redirect:/user/login?registered";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(){
+    public String login(Model model, String error, String logout, String registered){
+        if (securityService.isLoggedIn()){
+            return "redirect:/restaurant/";
+        }
+
+        if (error != null)
+            model.addAttribute("error", "Your username and password is invalid.");
+
+        if (logout != null)
+            model.addAttribute("message", "You have been logged out successfully.");
+
+        if (registered != null)
+            model.addAttribute("message", "You have been registered successfully.");
+
         return "user/login-form";
     }
 }

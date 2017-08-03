@@ -28,8 +28,11 @@ public class HibernateUserDao extends HibernateDaoSupport implements UserDao {
 
     @Override
     public User findByUserEmail(String email) {
+        User user = new User();
+        user.setEmail(email);
         List<User> users;
-        users = (List<User>) getHibernateTemplate().find("from com.sap.wte.models.User u where u.email = ?", email);
+        users = (List<User>) getHibernateTemplate().findByExample(user);
+//        users = (List<User>) getHibernateTemplate().find("from com.sap.wte.models.User u where u.email = ?", email);
 
         if (!users.isEmpty()){
             return users.get(0);

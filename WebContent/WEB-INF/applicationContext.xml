@@ -23,8 +23,8 @@
     <!-- BOOKING REST BEANS-->
 
     <!-- Beans de service -->
-    <bean name="restaurantService" class="com.sap.wte.services.imp.DefaultRestaurantService" />
-    <bean name="userService" class="com.sap.wte.services.imp.DefaultUserService" />
+    <bean name="restaurantService" class="com.sap.wte.services.imp.RestaurantServiceImpl" />
+    <bean name="userService" class="com.sap.wte.services.imp.UserServiceImpl" />
 
     <!-- Beans de dao -->
     <bean name="hibernateRestaurantDao" class="com.sap.wte.daos.imp.HibernateRestaurantDao">

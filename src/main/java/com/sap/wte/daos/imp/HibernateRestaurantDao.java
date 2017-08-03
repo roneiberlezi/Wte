@@ -12,13 +12,11 @@ import java.util.List;
  */
 public class HibernateRestaurantDao extends HibernateDaoSupport implements RestaurantDao {
 
-    @Transactional
     @Override
     public void insert(Restaurant restaurant) {
         getHibernateTemplate().save(restaurant);
     }
 
-    @Transactional
     @Override
     public void update(Restaurant restaurant) {
         getHibernateTemplate().update(restaurant);
@@ -29,7 +27,6 @@ public class HibernateRestaurantDao extends HibernateDaoSupport implements Resta
         return (List<Restaurant>) getHibernateTemplate().find("from com.sap.wte.models.Restaurant");
     }
 
-    @Transactional
     @Override
     public void delete(int id) {
         Restaurant restaurant = new Restaurant();

@@ -8,7 +8,13 @@
 }
 
 .img-size {
-    max-height: 200px;
+    max-height: 170px;
+    height: auto;
+    vertical-align: middle;
+}
+
+.img-size-edit {
+    max-height: 250px;
     height: auto;
     vertical-align: middle;
 }
@@ -23,6 +29,10 @@
     color: red;
 }
 
+.success-message {
+    color: green;
+}
+
 
 
 /*Login form*/
@@ -34,10 +44,26 @@
  * General styles
  */
 
+.content-color{
+    /*background-color: #AEABB9;*/
+}
+
+.nav-bar-color{
+    background-color: #0;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: #FFFFFF;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #FFFFFF;
+}
+
 body, html{
     height: 100%;
     background-repeat: no-repeat;
-    background-color: #d3d3d3;
+    /*background-color: #868686;*/
     font-family: 'Oxygen', sans-serif;
 }
 

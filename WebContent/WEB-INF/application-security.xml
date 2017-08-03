@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <http auto-config="true">
+        <intercept-url pattern="/restaurant/**" access="isAuthenticated()"/>
+        <intercept-url pattern="/user/login" access="permitAll"/>
+        <form-login login-page="/user/login"
+                    login-processing-url="/user/login"
+                    default-target-url="/restaurant/"
+                    authentication-failure-url="/user/login?error"
+                    username-parameter="email"
+                    password-parameter="password"/>
+        <logout logout-url="/user/logout" logout-success-url="/user/login?logout" />
+        <csrf disabled="true"/>
+    </http>
+
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider user-service-ref="userDetailsServiceImpl">
+            <password-encoder ref="encoder" />
+        </authentication-provider>
+    </authentication-manager>
+
+    <beans:bean id="userDetailsServiceImpl" class="com.sap.wte.services.imp.UserDetailsServiceImpl" />
+
+    <beans:bean id="securityService" class="com.sap.wte.services.imp.SecurityServiceImpl" />
+
+    <beans:bean id="encoder"
+                class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <beans:constructor-arg name="strength" value="11"/>
+    </beans:bean>
+</beans:beans>

@@ -47,17 +47,19 @@ function callback(results, status) {
 
         for (var i = 0; i < results.length; i++) {
             var place = results[i];
-            console.log(results[i])
+
             $("#googleResult").append(
                 '<a href="#item" class="list-group-item list-group-item-action flex-column align-items-start">' +
                     '<div class="row content">' +
-                        '<div class="col-md-6 justify-content-between">' +
+                        '<div class="col-md-2 justify-content-between">' +
+                            '<div class="thumbnail" >' +
+                                '<img class="img-responsive center-block img-size" id="imgurl" src="' + ((results[i].photos) ? results[i].photos[0].getUrl({'maxWidth': 500, 'maxHeight': 500}) : results[i].icon) + '">' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="col-md-10 justify-content-between">' +
                             '<h4 class="mb-1" id="name">' + results[i].name + '</h4>' +
                             '<p class="mb-1" id="address">'+ results[i].vicinity +'</p>' +
                             '<br>' +
-                        '</div>' +
-                        '<div class="col-md-6 justify-content-between">' +
-                            '<img class="img-responsive center-block" id="imgurl" src="' + results[i].icon + '">' +
                         '</div>' +
                     '</div>' +
                 '</a>'

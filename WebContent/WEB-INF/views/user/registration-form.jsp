@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt_BR">
 <%@include file="/resources/includes/header.jsp"%>
 <body>
 

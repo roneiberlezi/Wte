@@ -1,6 +1,10 @@
 package com.sap.wte.controllers;
 
 import com.sap.wte.services.RestaurantService;
+import com.sap.wte.services.SecurityService;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,8 +20,9 @@ import javax.annotation.Resource;
 @Controller
 @RequestMapping(value = "/")
 public class WteController {
+
     @Resource
-    RestaurantService restaurantService;
+    SecurityService securityService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(){

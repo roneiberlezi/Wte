@@ -32,8 +32,8 @@ public class User {
 
     @Column(name = "password")
     @NotBlank
-    @Length(min = 6, message = "Deve conter no mínimo 6 caracteres")
-    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z]).{6,25}$", message = "Deve conter números e letras")
+//    @Length(min = 6, message = "Deve conter no mínimo 6 caracteres")
+//    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z]).{6,25}$", message = "Deve conter números e letras")
     private String password;
 
     @Column(name = "passwordConfirm")

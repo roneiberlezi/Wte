@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt_BR">
     <%@include file="/resources/includes/header.jsp"%>
 <body>
 
@@ -21,16 +21,18 @@
         <div class="main-login main-center">
             <form:form class="form-horizontal" modelAttribute="user" servletRelativeAction="login" method="post">
                 <div class="form-group">
-                    <label for="username" class="cols-sm-2 control-label">Username</label>
+                    <span class="success-message" >${message}</span>
+                    <label for="email" class="cols-sm-2 control-label">E-mail</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username"/>
+                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="email" id="email"  placeholder="Enter your E-mail"/>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
+                    <span class="error-message" >${error}</span>
                     <label for="password" class="cols-sm-2 control-label">Password</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
@@ -41,7 +43,7 @@
                 </div>
 
                 <div class="form-group ">
-                    <button type="button" class="btn btn-primary btn-lg btn-block login-button">Sign in</button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Sign in</button>
                 </div>
                 <div class="login-register">
                     <a href="/user/register">Create account</a> or <a href="#">reset password</a>

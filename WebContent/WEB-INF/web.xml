@@ -21,6 +21,7 @@
             /WEB-INF/applicationContext.xml
             /WEB-INF/*-servlet.xml
             /WEB-INF/*-config.xml
+            /WEB-INF/*-security.xml
         </param-value>
     </context-param>
 
@@ -38,6 +39,15 @@
         <servlet-name>wte</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
 
 </web-app>
