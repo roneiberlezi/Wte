@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <!DOCTYPE html>
-<html lang="pt_BR">
+<html lang="en">
 <%@include file="/resources/includes/header.jsp"%>
 <body>
 
@@ -28,6 +28,17 @@
                             <form:input class="form-control" type="text" id="name" path="name" placeholder="Enter your Name"/>
                         </div>
                         <form:errors cssClass="error-message"  path="name"></form:errors>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dob" class="cols-sm-2 control-label">Name</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <form:input class="form-control" type="date" id="dob" path="dateOfBirth"/>
+                        </div>
+                        <form:errors cssClass="error-message"  path="dateOfBirth"></form:errors>
                     </div>
                 </div>
 

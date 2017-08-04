@@ -1,13 +1,13 @@
 package com.sap.wte.models;
 
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * Created by I863273 on 01/08/2017.
@@ -32,14 +32,13 @@ public class User {
 
     @Column(name = "password")
     @NotBlank
-//    @Length(min = 6, message = "Deve conter no mínimo 6 caracteres")
-//    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z]).{6,25}$", message = "Deve conter números e letras")
     private String password;
 
-    @Column(name = "passwordConfirm")
-    @NotBlank
+    @Transient
     private String passwordConfirm;
-    //private Date dateOfBirth;
+
+    @Column
+    private Date dateOfBirth;
 
 
     public int getId() {
@@ -80,5 +79,13 @@ public class User {
 
     public void setPasswordConfirm(String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 }

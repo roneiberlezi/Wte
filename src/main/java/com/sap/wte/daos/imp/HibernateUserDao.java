@@ -17,8 +17,11 @@ public class HibernateUserDao extends HibernateDaoSupport implements UserDao {
 
     @Override
     public User findByUserName(String name) {
+        User user = new User();
+        user.setName(name);
         List<User> users;
-        users = (List<User>) getHibernateTemplate().find("from com.sap.wte.models.User u where u.name = ?", name);
+        users = (List<User>) getHibernateTemplate().findByExample(user);
+
         if (!users.isEmpty()){
             return users.get(0);
         }else{
@@ -32,7 +35,6 @@ public class HibernateUserDao extends HibernateDaoSupport implements UserDao {
         user.setEmail(email);
         List<User> users;
         users = (List<User>) getHibernateTemplate().findByExample(user);
-//        users = (List<User>) getHibernateTemplate().find("from com.sap.wte.models.User u where u.email = ?", email);
 
         if (!users.isEmpty()){
             return users.get(0);
