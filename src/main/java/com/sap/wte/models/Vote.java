@@ -16,15 +16,12 @@ public class Vote {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "id")
-    private Voting voting;
+    private Poll poll;
 
     @ManyToOne
-    @JoinColumn(name = "id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "id")
     private Restaurant restaurant;
 
     public int getId() {
@@ -35,12 +32,12 @@ public class Vote {
         this.id = id;
     }
 
-    public Voting getVoting() {
-        return voting;
+    public Poll getVoting() {
+        return poll;
     }
 
-    public void setVoting(Voting voting) {
-        this.voting = voting;
+    public void setVoting(Poll poll) {
+        this.poll = poll;
     }
 
     public User getUser() {

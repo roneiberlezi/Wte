@@ -21,12 +21,12 @@
     </http>
 
     <authentication-manager alias="authenticationManager">
-        <authentication-provider user-service-ref="userDetailsServiceImpl">
+        <authentication-provider user-service-ref="userDetailsService">
             <password-encoder ref="encoder" />
         </authentication-provider>
     </authentication-manager>
 
-    <beans:bean id="userDetailsServiceImpl" class="com.sap.wte.services.imp.UserDetailsServiceImpl" />
+    <beans:bean id="userDetailsService" class="com.sap.wte.services.imp.UserDetailsServiceImpl" />
 
     <beans:bean id="securityService" class="com.sap.wte.services.imp.SecurityServiceImpl" />
 

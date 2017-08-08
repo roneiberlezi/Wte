@@ -12,17 +12,16 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="/">Where To Eat!</a>
             </div>
-            <%--<ul class="nav navbar-nav">--%>
+            <ul class="nav navbar-nav">
                 <%--<li class="active"><a href="#">Home</a></li>--%>
-                <%--<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>--%>
-                    <%--<ul class="dropdown-menu">--%>
-                        <%--<li><a href="#">Page 1-1</a></li>--%>
-                        <%--<li><a href="#">Page 1-2</a></li>--%>
-                        <%--<li><a href="#">Page 1-3</a></li>--%>
-                    <%--</ul>--%>
-                <%--</li>--%>
-                <%--<li><a href="#">Page 2</a></li>--%>
-            <%--</ul>--%>
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Poll<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" data-target="#myModal" data-toggle="modal">New Poll</a></li>
+                        <li><a href="#">End Poll</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Page 2</a></li>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a>
@@ -38,26 +37,8 @@
         </div>
     </nav>
 
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+    <%--<div id="modalPlace"></div>--%>
 
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
+    <%@include file="/resources/includes/poll-modal.jsp"%>
 
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
-                </div>
-                <div class="modal-body">
-                    <p>Some text in the modal.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
 </div>
