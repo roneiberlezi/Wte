@@ -17,12 +17,15 @@
     <div class="row content">
         <div class="content-color col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2 text-left">
 
+
             <div class="list-group">
                 <h3 class="text-center">${poll.title}</h3>
 
+                <input id="searchBox" type="text" class="form-control" placeholder="Search for restaurants" />
+
                 <c:forEach var="restaurant" items="${restaurants}">
 
-                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start${vote.restaurant.id == restaurant.id ? ' active' : ''}">
+                    <a id="itemRestaurant${restaurant.id}" href="#" class="list-group-item list-group-item-action flex-column align-items-start${vote.restaurant.id == restaurant.id ? ' active' : ''}">
 
 
                         <div class="row content">
@@ -57,6 +60,7 @@
 
                         </div>
                     </a>
+
 
                 </c:forEach>
 

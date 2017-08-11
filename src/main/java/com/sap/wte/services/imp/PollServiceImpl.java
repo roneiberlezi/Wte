@@ -2,7 +2,6 @@ package com.sap.wte.services.imp;
 
 import com.sap.wte.daos.PollDao;
 import com.sap.wte.models.Poll;
-import com.sap.wte.pojos.PollForm;
 import com.sap.wte.services.PollService;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,15 +22,6 @@ public class PollServiceImpl implements PollService {
     @Override
     public void create(Poll poll) {
         pollDao.save(poll);
-    }
-
-    @Override
-    public void create(PollForm poll) {
-        Poll p = new Poll();
-        p.setDate(poll.getDate());
-        p.setTitle(poll.getTitle());
-
-        pollDao.save(p);
     }
 
     @Override

@@ -68,10 +68,17 @@ function refreshVotes() {
 }
 
 
+function filterRestaurants(value){
+
+}
 
 
 
 $(function () {
     refreshVotes();
     setInterval(refreshVotes, 10000);
+
+    $("#searchBox").keyup($(this).val());
+
+
 })();
