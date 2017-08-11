@@ -1,11 +1,17 @@
 package com.sap.wte.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.*;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 /**
  * Created by I863273 on 26/07/2017.
@@ -41,6 +47,12 @@ public class Restaurant {
 
     @Column(name = "imageURL")
     private String imageURL;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "restaurant_id")
+    @Filter(name="myPoll", condition="poll_id = :pollParam")
+    @JsonIgnoreProperties({"poll", "restaurant"})
+    private Set<Vote> votes;
 
     public int getId() {
         return id;
@@ -96,5 +108,13 @@ public class Restaurant {
 
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
+    }
+
+    public Set<Vote> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(Set<Vote> votes) {
+        this.votes = votes;
     }
 }

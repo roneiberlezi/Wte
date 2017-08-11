@@ -1,11 +1,15 @@
 package com.sap.wte.services.imp;
 
+import com.sap.wte.comparators.RestaurantComparator;
 import com.sap.wte.daos.RestaurantDao;
+import com.sap.wte.models.Poll;
 import com.sap.wte.models.Restaurant;
 import com.sap.wte.services.RestaurantService;
 import org.springframework.transaction.annotation.Transactional;
+import com.sap.wte.comparators.RestaurantComparator;
 
 import javax.annotation.Resource;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -20,6 +24,14 @@ public class RestaurantServiceImpl implements RestaurantService{
     @Override
     public List<Restaurant> listRestaurants() {
         return restaurantDao.listRestaurants();
+    }
+
+    @Override
+    public List<Restaurant> listRestaurants(Poll poll) {
+        List<Restaurant> list;
+        list = restaurantDao.listRestaurants(poll);
+        list.sort( new RestaurantComparator());
+        return list;
     }
 
     @Override

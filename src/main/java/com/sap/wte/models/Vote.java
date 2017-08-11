@@ -1,5 +1,8 @@
 package com.sap.wte.models;
 
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.ParamDef;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -8,6 +11,9 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "vote")
+@FilterDef(name = "myPoll",
+        defaultCondition = "poll_id = :pollParam",
+        parameters = {@ParamDef(name = "pollParam", type = "int")})
 public class Vote {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,11 +38,11 @@ public class Vote {
         this.id = id;
     }
 
-    public Poll getVoting() {
+    public Poll getPoll() {
         return poll;
     }
 
-    public void setVoting(Poll poll) {
+    public void setPoll(Poll poll) {
         this.poll = poll;
     }
 

@@ -29,7 +29,7 @@ public class Poll {
     @Column(name = "title")
     private String title;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "poll_id")
     private Set<Vote> votes;
 

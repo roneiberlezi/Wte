@@ -7,6 +7,9 @@ import com.sap.wte.services.PollService;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Created by I863273 on 08/08/2017.
@@ -29,5 +32,25 @@ public class PollServiceImpl implements PollService {
         p.setTitle(poll.getTitle());
 
         pollDao.save(p);
+    }
+
+    @Override
+    public Poll getCurrentPoll() {
+        Date today;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDate localDate = LocalDate.now();
+        today = Date.valueOf(localDate);
+
+        Poll poll = pollDao.getPoll(today);
+
+        if (poll == null){
+            poll = new Poll();
+            poll.setDate(today);
+            poll.setTitle("Poll of " + today);
+
+            create(poll);
+        }
+
+        return poll;
     }
 }

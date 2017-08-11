@@ -1,7 +1,13 @@
 package com.sap.wte.controllers;
 
+import com.sap.wte.models.Poll;
 import com.sap.wte.models.Restaurant;
+import com.sap.wte.models.User;
+import com.sap.wte.models.Vote;
+import com.sap.wte.services.PollService;
 import com.sap.wte.services.RestaurantService;
+import com.sap.wte.services.SecurityService;
+import com.sap.wte.services.VoteService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,9 +30,23 @@ public class RestaurantController {
     @Resource
     RestaurantService restaurantService;
 
+    @Resource
+    PollService pollService;
+
+    @Resource
+    SecurityService securityService;
+
+    @Resource
+    VoteService voteService;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String list(Model model){
-        model.addAttribute("restaurants", restaurantService.listRestaurants());
+        Poll currentPoll = pollService.getCurrentPoll();
+        User currentUser = securityService.getCurrentUser();
+        Vote vote = voteService.findPreviousVote(currentUser, currentPoll);
+        model.addAttribute("poll", currentPoll);
+        model.addAttribute("vote", vote);
+        model.addAttribute("restaurants", restaurantService.listRestaurants(pollService.getCurrentPoll()));
         return "restaurant/list";
     }
 
@@ -47,6 +67,8 @@ public class RestaurantController {
         if (restaurant.getId() == 0) {
             restaurantService.createRestaurant(restaurant);
         }else{
+            Restaurant r = restaurantService.getRestaurant(restaurant.getId());
+            restaurant.setVotes(r.getVotes());
             restaurantService.updateRestaurant(restaurant);
         }
 

@@ -1,13 +1,13 @@
 package com.sap.wte.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.sql.Date;
+import java.util.Set;
 
 /**
  * Created by I863273 on 01/08/2017.
@@ -19,6 +19,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     @NotNull
+    @JsonIgnore
     private int id;
 
     @Column(name = "name")
@@ -28,18 +29,26 @@ public class User {
     @Email
     @Column(name = "email", unique = true)
     @NotBlank
+    @JsonIgnore
     private String email;
 
     @Column(name = "password")
     @NotBlank
+    @JsonIgnore
     private String password;
 
     @Transient
+    @JsonIgnore
     private String passwordConfirm;
 
     @Column
+    @JsonIgnore
     private Date dateOfBirth;
 
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private Set<Vote> votes;
 
     public int getId() {
         return id;
@@ -87,5 +96,13 @@ public class User {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public Set<Vote> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(Set<Vote> votes) {
+        this.votes = votes;
     }
 }

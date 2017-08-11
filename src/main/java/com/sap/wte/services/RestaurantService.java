@@ -1,5 +1,6 @@
 package com.sap.wte.services;
 
+import com.sap.wte.models.Poll;
 import com.sap.wte.models.Restaurant;
 
 import javax.annotation.Resource;
@@ -10,6 +11,8 @@ import java.util.List;
  */
 public interface RestaurantService {
     List<Restaurant> listRestaurants();
+
+    List<Restaurant> listRestaurants(Poll poll);
 
     void createRestaurant(Restaurant restaurant);
 

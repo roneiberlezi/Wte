@@ -34,6 +34,9 @@
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
                 <prop key="hibernate.flushMode">AUTO</prop>
 
+                <!--Workaround-->
+                <!--<prop key="hibernate.enable_lazy_load_no_trans">TRUE</prop>-->
+
             </props>
         </property>
 

@@ -10,4 +10,8 @@ public interface PollService {
     void create(Poll poll);
 
     void create(PollForm poll);
+
+    Poll getCurrentPoll();
+
+
 }

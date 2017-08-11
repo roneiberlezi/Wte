@@ -33,6 +33,16 @@
     color: green;
 }
 
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+    z-index: 2;
+    color: #fff;
+    background-color: #a83545;
+    border-color: #a83545;
+}
+
+.color-black{
+    color: black;
+}
 
 
 /*Login form*/
@@ -49,7 +59,7 @@
 }
 
 .nav-bar-color{
-    background-color: #0;
+    background-color: #333;
 }
 
 .navbar-inverse .navbar-nav>li>a {

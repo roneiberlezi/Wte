@@ -1,5 +1,6 @@
 package com.sap.wte.daos;
 
+import com.sap.wte.models.Poll;
 import com.sap.wte.models.Restaurant;
 
 import java.util.List;
@@ -13,6 +14,8 @@ public interface RestaurantDao {
     void update(Restaurant restaurant);
 
     List<Restaurant> listRestaurants();
+
+    List<Restaurant> listRestaurants(Poll poll);
 
     void delete(int id);
 

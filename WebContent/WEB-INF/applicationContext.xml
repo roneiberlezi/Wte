@@ -26,6 +26,7 @@
     <bean name="restaurantService" class="com.sap.wte.services.imp.RestaurantServiceImpl" />
     <bean name="userService" class="com.sap.wte.services.imp.UserServiceImpl" />
     <bean name="pollService" class="com.sap.wte.services.imp.PollServiceImpl" />
+    <bean name="voteService" class="com.sap.wte.services.imp.VoteServiceImpl" />
 
     <!-- Beans de dao -->
     <bean name="hibernateRestaurantDao" class="com.sap.wte.daos.imp.HibernateRestaurantDao">
@@ -37,6 +38,10 @@
     </bean>
 
     <bean name="hibernatePollDao" class="com.sap.wte.daos.imp.HibernatePollDao" >
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean name="hibernateVoteDao" class="com.sap.wte.daos.imp.HibernateVoteDao" >
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 

@@ -1,6 +1,8 @@
 package com.sap.wte.services.imp;
 
+import com.sap.wte.models.User;
 import com.sap.wte.services.SecurityService;
+import com.sap.wte.services.UserService;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
@@ -14,6 +16,12 @@ import javax.annotation.Resource;
  */
 public class SecurityServiceImpl implements SecurityService{
 
+    @Resource
+    SecurityService securityService;
+
+    @Resource
+    UserService userService;
+
     @Override
     public boolean isLoggedIn() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -22,5 +30,15 @@ public class SecurityServiceImpl implements SecurityService{
             return true;
         }
         return false;
+    }
+
+    @Override
+    public String getUserEmail() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
+
+    @Override
+    public User getCurrentUser() {
+        return userService.findUserByEmail(securityService.getUserEmail());
     }
 }

@@ -14,13 +14,13 @@
             </div>
             <ul class="nav navbar-nav">
                 <%--<li class="active"><a href="#">Home</a></li>--%>
-                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Poll<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#" data-target="#myModal" data-toggle="modal">New Poll</a></li>
-                        <li><a href="#">End Poll</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Page 2</a></li>
+                <%--<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Poll<span class="caret"></span></a>--%>
+                    <%--<ul class="dropdown-menu">--%>
+                        <%--<li><a href="#" data-target="#myModal" data-toggle="modal">New Poll</a></li>--%>
+                        <%--<li><a href="#">End Poll</a></li>--%>
+                    <%--</ul>--%>
+                <%--</li>--%>
+                <%--<li><a href="#">Page 2</a></li>--%>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
@@ -39,6 +39,6 @@
 
     <%--<div id="modalPlace"></div>--%>
 
-    <%@include file="/resources/includes/poll-modal.jsp"%>
+    <%--<%@include file="/resources/includes/poll-modal.jsp"%>--%>
 
 </div>
