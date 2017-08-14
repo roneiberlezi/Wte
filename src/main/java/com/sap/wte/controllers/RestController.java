@@ -5,6 +5,7 @@ import com.sap.wte.services.PollService;
 import com.sap.wte.services.RestaurantService;
 import com.sap.wte.services.VoteService;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,5 +42,11 @@ public class RestController {
     @ResponseBody
     public List<Restaurant> listRestaurants(){
         return restaurantService.listRestaurants(pollService.getCurrentPoll());
+    }
+
+    @RequestMapping(value = "/list-restaurants/{pollId}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Restaurant> listRestaurants(@PathVariable("pollId") int pollId){
+        return restaurantService.listRestaurants(pollService.getPoll(pollId));
     }
 }

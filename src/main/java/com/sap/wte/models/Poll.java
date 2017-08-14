@@ -29,6 +29,9 @@ public class Poll {
     @Column(name = "title")
     private String title;
 
+    @ManyToOne
+    private Restaurant restaurant;
+
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "poll_id")
     private Set<Vote> votes;
@@ -71,5 +74,13 @@ public class Poll {
 
     public void setVotes(Set<Vote> votes) {
         this.votes = votes;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant winner) {
+        this.restaurant = winner;
     }
 }

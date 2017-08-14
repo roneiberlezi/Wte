@@ -4,6 +4,7 @@ import com.sap.wte.models.Poll;
 import com.sap.wte.models.Restaurant;
 import com.sap.wte.models.User;
 import com.sap.wte.models.Vote;
+import com.sap.wte.pojos.PollPojo;
 import com.sap.wte.services.PollService;
 import com.sap.wte.services.RestaurantService;
 import com.sap.wte.services.SecurityService;
@@ -11,6 +12,7 @@ import com.sap.wte.services.VoteService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +21,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by I863273 on 24/07/2017.
@@ -44,11 +48,50 @@ public class RestaurantController {
         Poll currentPoll = pollService.getCurrentPoll();
         User currentUser = securityService.getCurrentUser();
         Vote vote = voteService.findPreviousVote(currentUser, currentPoll);
-        model.addAttribute("poll", currentPoll);
+        //TODO - for each poll, fill the poll pojo properties
+        List<PollPojo> pollList = new ArrayList<PollPojo>();
+        for (Poll p : pollService.listPolls()) {
+            PollPojo pp = new PollPojo();
+            pp.setId(p.getId());
+            pp.setDate(p.getDate());
+            pp.setTitle(p.getTitle());
+            pp.setRestaurants(restaurantService.listRestaurants(p));
+            pollList.add(pp);
+        }
+
+        //TODO - order poll pojo list and restaurant pojo list inside poll
+        model.addAttribute("historyPolls", pollList);
         model.addAttribute("vote", vote);
-        model.addAttribute("restaurants", restaurantService.listRestaurants(pollService.getCurrentPoll()));
+        model.addAttribute("restaurants", restaurantService.listRestaurants(currentPoll));
         return "restaurant/list";
     }
+
+
+    @RequestMapping(value = "/{pollId}", method = RequestMethod.GET)
+    public String lisPastPoll(@PathVariable("pollId") int pollId, Model model){
+        Poll pastPoll = pollService.getPoll(pollId);
+        User currentUser = securityService.getCurrentUser();
+        Vote vote = voteService.findPreviousVote(currentUser, pastPoll);
+        //TODO - for each poll, fill the poll pojo properties
+        List<PollPojo> pollList = new ArrayList<PollPojo>();
+        for (Poll p : pollService.listPolls()) {
+            PollPojo pp = new PollPojo();
+            pp.setId(p.getId());
+            pp.setDate(p.getDate());
+            pp.setTitle(p.getTitle());
+            pp.setRestaurants(restaurantService.listRestaurants(p));
+            pollList.add(pp);
+        }
+
+        //TODO - order poll pojo list and restaurant pojo list inside poll
+        model.addAttribute("polls", pollList);
+        model.addAttribute("vote", vote);
+        model.addAttribute("restaurants", restaurantService.listRestaurants(pastPoll));
+        return "restaurant/list";
+    }
+
+
+
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String newRestaurantForm(Model model){

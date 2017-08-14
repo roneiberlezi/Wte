@@ -1,4 +1,5 @@
 var listRestaurants;
+var pollId = '';
 
 function listVotesModal(restaurantId) {
     $("#votes-content").html("");
@@ -47,7 +48,7 @@ function vote(restaurantId, e) {
 }
 
 function refreshVotes() {
-    var url = "/rest/list-restaurants";
+    var url = "/rest/list-restaurants/" + pollId;
     $.ajax({
         type: "GET",
         url: url,
@@ -68,17 +69,26 @@ function refreshVotes() {
 }
 
 
-function filterRestaurants(value){
-
-}
-
-
 
 $(function () {
+
+    pollId = window.location.href.substr(window.location.href.lastIndexOf('/') + 1);
     refreshVotes();
     setInterval(refreshVotes, 10000);
 
-    $("#searchBox").keyup($(this).val());
+    $("#searchBox").quicksearch(".list-group a");
 
+    $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Collapse this branch');
+    $('.tree li.parent_li > span').on('click', function (e) {
+        var children = $(this).parent('li.parent_li').find(' > ul > li');
+        if (children.is(":visible")) {
+            children.hide('fast');
+            $(this).attr('title', 'Expand this branch');
+        } else {
+            children.show('fast');
+            $(this).attr('title', 'Collapse this branch');
+        }
+        e.stopPropagation();
+    });
 
 })();

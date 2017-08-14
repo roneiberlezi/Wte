@@ -14,6 +14,7 @@
     <%-- Style --%>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap.min.css" />">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/custom.css" />">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css" />">
 
     <!-- Website Font style -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
