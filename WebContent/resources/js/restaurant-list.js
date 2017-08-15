@@ -59,12 +59,8 @@ function refreshVotes() {
                 restaurants.forEach(function (restaurant) {
                     $("#restaurantVoteId" + restaurant.id).html(restaurant.votes.length + " Votes");
                 });
-            }else{
-                //TODO - Falha ao votar
             }
         }
-    }).fail(function (data) {
-        //TODO - Falha ao votar
     });
 }
 

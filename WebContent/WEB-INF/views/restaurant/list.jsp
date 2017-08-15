@@ -16,8 +16,7 @@
 <div class="container-fluid text-center">
     <div class="row content">
         <div class="content-color col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2 text-left">
-
-            <input id="searchBox" type="text" class="form-control" placeholder="Search for restaurants" />
+            <input id="searchBox" type="text" class="form-control search-input" placeholder="Search for restaurants" />
 
             <div class="list-group">
                 <c:forEach var="restaurant" items="${restaurants}">
@@ -29,7 +28,9 @@
                                 <div class="thumbnail text-center" >
                                     <img src="${restaurant.imageURL}" class="img-size">
                                     <h4 id="restaurantVoteId${restaurant.id}" class="color-black">${restaurant.votes.size()} Votes</h4>
-                                    <button type="button" class="btn btn-danger" onclick="vote(${restaurant.id}, this)">Vote!</button>
+                                    <c:if test="${poll.state.toString() eq 'O'}">
+                                        <button type="button" class="btn btn-danger" onclick="vote(${restaurant.id}, this)">Vote!</button>
+                                    </c:if>
                                     <button type="button" class="btn btn-danger" onclick="listVotesModal(${restaurant.id})">View Votes</button>
                                 </div>
                             </div>
@@ -49,9 +50,14 @@
                             </div>
 
                             <div class="col-md-3 justify-content-between">
-                                <%--TODO - Verificar se foi o voto ou é o ganhador na poll já fechada--%>
+                                <c:if test="${(poll.restaurant.id == restaurant.id) and (poll.state.toString() eq 'C')}">
+                                    <img src="/resources/images/winner.png" class="img-size center-block">
+                                    <%--<h3 class="text-center">Winner!</h3>--%>
+                                </c:if>
+                                <c:if test='${vote.restaurant.id == restaurant.id and poll.state.toString() eq "C"}'>
+                                    <h3 class="text-center">Your Vote!</h3>
+                                </c:if>
                             </div>
-
                         </div>
                     </a>
 
@@ -68,13 +74,13 @@
             <div class="tree well">
                 <ul class="no-padding">
                     <li>
-                        <span><i class="fa fa-history"></i> Past Polls</span>
+                        <span><i class="fa fa-history"></i> Poll History</span>
                         <ul>
-                            <c:forEach var="poll" items="${historyPolls}">
+                            <c:forEach var="pollIterator" items="${historyPolls}" varStatus = "status">
                                 <li>
-                                    <span><i class="fa fa-calendar"></i> ${poll.date}</span> <a href="/restaurant/${poll.id}">View Poll</a>
+                                    <span class="${poll.id eq pollIterator.id ? 'history-active' : ''}"><i class="fa fa-calendar"></i> ${pollIterator.date}${status.first ? ' (Current Poll)' : ''}</span> <a href="/restaurant/${pollIterator.id}">View Poll</a>
                                     <ul>
-                                        <c:forEach var="restaurant" items="${poll.restaurants}">
+                                        <c:forEach var="restaurant" items="${pollIterator.restaurants}">
                                             <c:if test="${restaurant.votes.size() > 0}">
                                                 <li>
                                                     <span><i class="fa fa-cutlery"></i>  <span class="badge">${restaurant.votes.size()}</span> ${restaurant.name}</span>

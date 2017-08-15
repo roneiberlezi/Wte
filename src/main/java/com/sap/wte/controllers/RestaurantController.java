@@ -48,7 +48,7 @@ public class RestaurantController {
         Poll currentPoll = pollService.getCurrentPoll();
         User currentUser = securityService.getCurrentUser();
         Vote vote = voteService.findPreviousVote(currentUser, currentPoll);
-        //TODO - for each poll, fill the poll pojo properties
+
         List<PollPojo> pollList = new ArrayList<PollPojo>();
         for (Poll p : pollService.listPolls()) {
             PollPojo pp = new PollPojo();
@@ -59,7 +59,8 @@ public class RestaurantController {
             pollList.add(pp);
         }
 
-        //TODO - order poll pojo list and restaurant pojo list inside poll
+
+        model.addAttribute("polls", currentPoll);
         model.addAttribute("historyPolls", pollList);
         model.addAttribute("vote", vote);
         model.addAttribute("restaurants", restaurantService.listRestaurants(currentPoll));
@@ -72,7 +73,7 @@ public class RestaurantController {
         Poll pastPoll = pollService.getPoll(pollId);
         User currentUser = securityService.getCurrentUser();
         Vote vote = voteService.findPreviousVote(currentUser, pastPoll);
-        //TODO - for each poll, fill the poll pojo properties
+
         List<PollPojo> pollList = new ArrayList<PollPojo>();
         for (Poll p : pollService.listPolls()) {
             PollPojo pp = new PollPojo();
@@ -83,8 +84,9 @@ public class RestaurantController {
             pollList.add(pp);
         }
 
-        //TODO - order poll pojo list and restaurant pojo list inside poll
-        model.addAttribute("polls", pollList);
+
+        model.addAttribute("poll", pastPoll);
+        model.addAttribute("historyPolls", pollList);
         model.addAttribute("vote", vote);
         model.addAttribute("restaurants", restaurantService.listRestaurants(pastPoll));
         return "restaurant/list";

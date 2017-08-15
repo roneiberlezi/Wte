@@ -22,7 +22,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(User user) {
-        //TODO - criptografar a senha
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userDao.save(user);
     }

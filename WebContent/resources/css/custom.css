@@ -1,5 +1,18 @@
-body{
+body {
     background-color: #868686;
+}
+
+.search-input {
+    margin-bottom: 5px;
+    height: 42px;
+}
+.navbar {
+    margin-bottom: 5px;
+}
+
+.history-active, .history-active:focus, .history-active:hover, .history-active:active {
+    background-color: #a83545 !important;
+    color: #fff !important;
 }
 
 .input-group {
@@ -12,7 +25,7 @@ body{
 }
 
 .img-size {
-    max-height: 170px;
+    max-height: 90px;
     height: auto;
     vertical-align: middle;
 }
