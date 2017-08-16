@@ -92,9 +92,8 @@ public class RestaurantController {
 
     @ResponseBody
     @RequestMapping(value = "/filter", method = RequestMethod.POST)
-    public List<Restaurant> filter(List<String> words){
-        for (String word : words)
-            System.out.println(word);
+    public List<Restaurant> filter(@RequestParam("filter") String filter){
+        restaurantService.filterRestaurants(filter);
 
         return null;
     }

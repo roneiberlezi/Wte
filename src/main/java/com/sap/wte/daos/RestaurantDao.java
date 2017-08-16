@@ -20,4 +20,6 @@ public interface RestaurantDao {
     void delete(int id);
 
     Restaurant getRestaurant(int id);
+
+    List<Restaurant> filter(String value);
 }

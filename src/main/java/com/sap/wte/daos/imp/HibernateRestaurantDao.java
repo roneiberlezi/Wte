@@ -4,9 +4,15 @@ import com.sap.wte.daos.RestaurantDao;
 import com.sap.wte.models.Poll;
 import com.sap.wte.models.Restaurant;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.search.FullTextSession;
+import org.hibernate.search.Search;
+import org.hibernate.search.jpa.FullTextEntityManager;
+import org.hibernate.search.query.dsl.QueryBuilder;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 /**
@@ -47,5 +53,39 @@ public class HibernateRestaurantDao extends HibernateDaoSupport implements Resta
     @Override
     public Restaurant getRestaurant(int id) {
         return (Restaurant) getHibernateTemplate().get(Restaurant.class, id);
+    }
+
+    @Override
+    public List<Restaurant> filter(String value) {
+
+        try {
+            FullTextSession fullTextSession = Search.getFullTextSession(getSessionFactory().getCurrentSession());
+            Transaction tx = fullTextSession.getTransaction();
+
+            QueryBuilder qb = fullTextSession.getSearchFactory()
+                    .buildQueryBuilder().forEntity(Restaurant.class)
+                    .overridesForField("name", "customanalyzer_query")
+                    .overridesForField("description", "customanalyzer_query")
+                    .overridesForField("location", "customanalyzer_query")
+                    .get();
+            org.apache.lucene.search.Query query = qb
+                    .keyword()
+                    .onFields("name", "description", "location")
+                    .matching(value)
+                    .createQuery();
+
+            // wrap Lucene query in a org.hibernate.Query
+            org.hibernate.Query hibQuery =
+                    fullTextSession.createFullTextQuery(query, Restaurant.class);
+
+            // execute search
+            List<Restaurant> result = (List<Restaurant>) hibQuery.list();
+
+            tx.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

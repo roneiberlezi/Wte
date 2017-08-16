@@ -2,6 +2,8 @@ package com.sap.wte.daos.imp;
 
 import com.sap.wte.daos.PollDao;
 import com.sap.wte.models.Poll;
+import org.hibernate.search.FullTextSession;
+import org.hibernate.search.Search;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import java.sql.Date;
@@ -32,6 +34,14 @@ public class HibernatePollDao extends HibernateDaoSupport implements PollDao {
 
     @Override
     public Poll getPoll(Date date) {
+
+//        FullTextSession fullTextSession = Search.getFullTextSession(getSessionFactory().getCurrentSession());
+//        try {
+//            fullTextSession.createIndexer().startAndWait();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+
         List<Poll> result = (List<Poll>) currentSession().createQuery(
                 "select p from Poll p where p.date = :date")
                 .setParameter("date", date)

@@ -34,9 +34,8 @@
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
                 <prop key="hibernate.flushMode">AUTO</prop>
 
-                <!--Workaround-->
-                <!--<prop key="hibernate.enable_lazy_load_no_trans">TRUE</prop>-->
-
+                <prop key="hibernate.search.default.directory_provider">filesystem</prop>
+                <prop key="hibernate.search.default.indexBase">C:\Wte\lucene\indexes</prop>
             </props>
         </property>
 

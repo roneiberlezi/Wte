@@ -1,11 +1,17 @@
 package com.sap.wte.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
+import org.apache.lucene.analysis.core.WhitespaceTokenizerFactory;
+import org.apache.lucene.analysis.ngram.EdgeNGramFilterFactory;
+import org.apache.lucene.analysis.snowball.SnowballPorterFilterFactory;
 import org.hibernate.annotations.*;
+import org.hibernate.search.annotations.*;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Parameter;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
@@ -19,6 +25,18 @@ import java.util.Set;
 
 @Entity
 @Table(name = "restaurant")
+@Indexed
+@AnalyzerDef(name = "customanalyzer", tokenizer = @TokenizerDef(factory = WhitespaceTokenizerFactory.class), filters = {
+        @TokenFilterDef(factory = LowerCaseFilterFactory.class),
+        @TokenFilterDef(factory = SnowballPorterFilterFactory.class, params = { @Parameter(name = "language", value = "English") }),
+        @TokenFilterDef(factory = EdgeNGramFilterFactory.class, params = { @Parameter(name = "maxGramSize", value = "15") })
+
+})
+@AnalyzerDef(name = "customanalyzer_query", tokenizer = @TokenizerDef(factory = WhitespaceTokenizerFactory.class), filters = {
+        @TokenFilterDef(factory = LowerCaseFilterFactory.class),
+        @TokenFilterDef(factory = SnowballPorterFilterFactory.class, params = { @Parameter(name = "language", value = "English") })
+
+})
 public class Restaurant {
 
     @Id
@@ -29,9 +47,11 @@ public class Restaurant {
 
     @Column(name = "name")
     @NotBlank
+    @Field(index= Index.YES, analyze= Analyze.YES, analyzer = @Analyzer(definition = "customanalyzer"), store= Store.NO)
     private String name;
 
     @Column(name = "description")
+    @Field(index=Index.YES, analyze=Analyze.YES, analyzer = @Analyzer(definition = "customanalyzer"), store=Store.NO)
     private String description;
 
     @Column(name = "averagePrice")
@@ -40,6 +60,7 @@ public class Restaurant {
     private float averagePrice;
 
     @Column(name = "location")
+    @Field(index=Index.YES, analyze=Analyze.YES, analyzer = @Analyzer(definition = "customanalyzer"), store=Store.NO)
     private String location;
 
     @Column(name = "isAleloAccepted")

@@ -53,4 +53,9 @@ public class RestaurantServiceImpl implements RestaurantService{
     public void removeRestaurante(int id) {
         restaurantDao.delete(id);
     }
+
+    @Override
+    public List<Restaurant> filterRestaurants(String value) {
+        return restaurantDao.filter(value);
+    }
 }

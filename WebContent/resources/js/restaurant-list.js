@@ -64,13 +64,13 @@ function refreshVotes() {
     });
 }
 
-function filterRestaurants(value) {
-    var w = value.split(' ');
+function filterRestaurants(filter) {
+    // var w = value.split(' ');
     var url = "/restaurant/filter";
     $.ajax({
         type: "POST",
         url: url,
-        data: {words: w},
+        data: "filter=" + filter,
         success: function(restaurants)
         {
             if (restaurants){

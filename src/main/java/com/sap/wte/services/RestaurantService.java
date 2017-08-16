@@ -21,4 +21,6 @@ public interface RestaurantService {
     void updateRestaurant(Restaurant restaurant);
 
     void removeRestaurante(int id);
+
+    List<Restaurant> filterRestaurants(String value);
 }
