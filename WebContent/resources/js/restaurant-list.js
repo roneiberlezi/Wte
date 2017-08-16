@@ -64,6 +64,21 @@ function refreshVotes() {
     });
 }
 
+function filterRestaurants(value) {
+    var w = value.split(' ');
+    var url = "/restaurant/filter";
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {words: w},
+        success: function(restaurants)
+        {
+            if (restaurants){
+                consolose.log(restaurants);
+            }
+        }
+    });
+}
 
 
 $(function () {
@@ -72,7 +87,11 @@ $(function () {
     refreshVotes();
     setInterval(refreshVotes, 10000);
 
-    $("#searchBox").quicksearch(".list-group a");
+    $("#searchBox").keyup(function () {
+        filterRestaurants($(this).val());
+    });
+
+    // $("#searchBox").quicksearch(".list-group a");
 
     $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Collapse this branch');
     $('.tree li.parent_li > span').on('click', function (e) {

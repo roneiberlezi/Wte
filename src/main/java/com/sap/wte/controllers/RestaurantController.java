@@ -12,10 +12,7 @@ import com.sap.wte.services.VoteService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
@@ -93,6 +90,14 @@ public class RestaurantController {
     }
 
 
+    @ResponseBody
+    @RequestMapping(value = "/filter", method = RequestMethod.POST)
+    public List<Restaurant> filter(List<String> words){
+        for (String word : words)
+            System.out.println(word);
+
+        return null;
+    }
 
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)
